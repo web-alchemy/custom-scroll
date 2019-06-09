@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Custom Scroll</title>
+  <link rel="stylesheet" href="/src/style.css">
+  <style>
+    .main {
+      position: absolute;
+      top: 0;
+      left: 0;
+      overflow: auto;
+      box-sizing: border-box;
+      width: 100%;
+      height: 100%;
+    }
+
+    .grid {
+      display: flex;
+      flex-wrap: wrap;
+      padding: 1.5rem;
+    }
+
+      .grid > * {
+        margin: 1.1rem;
+        flex: 1 1 30%;
+        max-height: 50vh;
+        overflow: auto;
+      }
+
+    img {
+      display: block;
+    }
+
+    .demo {
+      border: 2px solid #fc0;
+    }
+  </style>
+</head>
+<body>
+
+    <div class="main grid">
+      <div class="demo">
+        <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium aliquid debitis consequatur nostrum repellendus laudantium, cum facilis ad, quos, nulla asperiores porro suscipit repellat earum provident? Nesciunt quae harum at.</div>
+        <img src="https://placeimg.com/400/200" alt="">
+        <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minus eum nemo rerum fuga excepturi neque dolor eveniet ut necessitatibus. Quam, incidunt. Ut, consequatur eligendi et itaque ipsa aut reiciendis laboriosam?</div>
+      </div>
+
+      <div class="demo">
+        <h3>Lorem, ipsum dolor.</h3>
+        <img src="https://placeimg.com/480/360" alt="">
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos consequatur suscipit amet impedit cumque iure dolore, aliquid, error quis similique doloremque non repellendus quam aperiam, porro adipisci libero voluptas praesentium?</p>
+      </div>
+
+      <div class="demo">
+        <h3>Lorem ipsum dolor sit.</h3>
+        <img src="https://placeimg.com/300/300" alt="">
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo sapiente suscipit totam quos, quaerat, saepe nobis labore itaque odit dolorum odio illum ullam fuga cumque qui repellat error asperiores exercitationem.</p>
+        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eaque repudiandae maiores eveniet?</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro maxime possimus dolor autem, commodi animi eos non in?</p>
+      </div>
+
+      <div class="demo">
+        <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium aliquid debitis consequatur nostrum repellendus laudantium, cum facilis ad, quos, nulla asperiores porro suscipit repellat earum provident? Nesciunt quae harum at.</div>
+        <img src="https://placeimg.com/400/200" alt="">
+        <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minus eum nemo rerum fuga excepturi neque dolor eveniet ut necessitatibus. Quam, incidunt. Ut, consequatur eligendi et itaque ipsa aut reiciendis laboriosam?</div>
+      </div>
+
+      <div class="demo">
+        <h3>Lorem, ipsum dolor.</h3>
+        <img src="https://placeimg.com/480/360" alt="">
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos consequatur suscipit amet impedit cumque iure dolore, aliquid, error quis similique doloremque non repellendus quam aperiam, porro adipisci libero voluptas praesentium?</p>
+      </div>
+
+      <div class="demo">
+        <h3>Lorem ipsum dolor sit.</h3>
+        <img src="https://placeimg.com/300/300" alt="">
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo sapiente suscipit totam quos, quaerat, saepe nobis labore itaque odit dolorum odio illum ullam fuga cumque qui repellat error asperiores exercitationem.</p>
+        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eaque repudiandae maiores eveniet?</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro maxime possimus dolor autem, commodi animi eos non in?</p>
+      </div>
+
+      <div class="demo">
+        <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium aliquid debitis consequatur nostrum repellendus laudantium, cum facilis ad, quos, nulla asperiores porro suscipit repellat earum provident? Nesciunt quae harum at.</div>
+        <img src="https://placeimg.com/400/200" alt="">
+        <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minus eum nemo rerum fuga excepturi neque dolor eveniet ut necessitatibus. Quam, incidunt. Ut, consequatur eligendi et itaque ipsa aut reiciendis laboriosam?</div>
+      </div>
+
+      <div class="demo">
+        <h3>Lorem, ipsum dolor.</h3>
+        <img src="https://placeimg.com/480/360" alt="">
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos consequatur suscipit amet impedit cumque iure dolore, aliquid, error quis similique doloremque non repellendus quam aperiam, porro adipisci libero voluptas praesentium?</p>
+      </div>
+
+      <div class="demo">
+        <h3>Lorem ipsum dolor sit.</h3>
+        <img src="https://placeimg.com/300/300" alt="">
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo sapiente suscipit totam quos, quaerat, saepe nobis labore itaque odit dolorum odio illum ullam fuga cumque qui repellat error asperiores exercitationem.</p>
+        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eaque repudiandae maiores eveniet?</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro maxime possimus dolor autem, commodi animi eos non in?</p>
+      </div>
+    </div>
+
+    <script type="module">
+      import CustomScroll from './src/custom-scroll.js';
+
+      window.MutationObserver = window.MutationObserver
+          || window.WebKitMutationObserver
+          || window.MozMutationObserver;
+
+      function onInit() {
+        const main = document.querySelector('.main');
+        const demos = [...document.querySelectorAll('.demo')];
+        const items = new Map();
+
+        let mo, ro;
+
+        if (window.MutationObserver) {
+          mo = new window.MutationObserver(onObserve);
+        }
+
+        if (window.ResizeObserver) {
+          ro = new window.ResizeObserver(onObserve);
+        }
+
+        function onObserve(records, ro) {
+          for (let record of records) {
+            if (items.has(record.target)) {
+              items.get(record.target).update();
+            }
+          }
+        }
+
+        function initObservers(element) {
+          if (mo) {
+            mo.observe(element, {
+              childList: true,
+              characterData: true,
+              subtree: true,
+            });
+          }
+
+          if (ro) {
+            ro.observe(element);
+          }
+        }
+
+        new CustomScroll(main, {
+          afterInit(instance, refs) {
+            refs.rootElement.classList.remove('grid');
+            refs.content.classList.add('grid');
+            items.set(refs.content, instance);
+            initObservers(refs.content);
+          }
+        });
+
+        demos.forEach((el) => {
+          new CustomScroll(el, {
+            afterInit(instance, refs) {
+              items.set(refs.content, instance);
+              initObservers(refs.content);
+            }
+          });
+        });
+
+        window.addEventListener('resize', function() {
+          for (let [element, instance] of items) {
+            instance.update();
+          }
+        })
+      }
+
+      window.addEventListener('load', onInit);
+    </script>
+</body>
+</html>
