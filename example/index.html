@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Custom Scroll</title>
-  <link rel="stylesheet" href="/src/style.css">
+  <link rel="stylesheet" href="/custom-scroll.css">
   <style>
     .main {
       position: absolute;
@@ -103,9 +103,8 @@
       </div>
     </div>
 
-    <script type="module">
-      import CustomScroll from './src/custom-scroll.js';
-
+    <script src="./custom-scroll.js"></script>
+    <script>
       window.MutationObserver = window.MutationObserver
           || window.WebKitMutationObserver
           || window.MozMutationObserver;

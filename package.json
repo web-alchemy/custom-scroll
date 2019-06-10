@@ -1,10 +1,51 @@
 {
-  "name": "custom-scroll",
+  "name": "@web-alchemy/custom-scroll",
+  "version": "1.0.0-alpha1.0",
+  "description": "Library for creating progressive enhancement custom scrollbar",
   "author": {
     "name": "monochromer",
     "email": "monochromer@mail.ru"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/web-alchemy/custom-scroll.git"
+  },
+  "bugs": {
+    "url": "https://github.com/web-alchemy/custom-scroll/issues"
+  },
+  "homepage": "https://github.com/web-alchemy/custom-scroll",
+  "files": [
+    "dist"
+  ],
+  "main": "dist/custom-scroll.js",
+  "module": "dist/custom-scroll.es.js",
+  "style": "dist/custom-scroll.css",
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
-    "dev": "npx browser-sync start --server --index example/index.html"
+    "release": "np",
+    "prepublishOnly": "npm run build",
+    "prebuild": "rimraf dist",
+    "build": "npm run build:js && npm run build:css",
+    "build:js": "rollup -c",
+    "build:css": "node build-css.js",
+    "example": "browser-sync start --server --index 'example/index.html' --serveStatic 'dist' --files 'dist'"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.4.5",
+    "@babel/preset-env": "^7.4.5",
+    "autoprefixer": "^9.6.0",
+    "browser-sync": "^2.26.7",
+    "change-case": "^3.1.0",
+    "lodash": "^4.17.11",
+    "np": "^5.0.3",
+    "postcss": "^7.0.17",
+    "postcss-csso": "^3.0.0",
+    "rimraf": "^2.6.3",
+    "rollup": "^1.14.6",
+    "rollup-plugin-babel": "^4.3.2",
+    "rollup-plugin-node-resolve": "^5.0.1",
+    "rollup-plugin-terser": "^5.0.0"
   }
 }
