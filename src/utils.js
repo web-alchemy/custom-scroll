@@ -37,3 +37,7 @@ export function addStylesToHead(cssText) {
   style.textContent = cssText;
   document.head.appendChild(style);
 }
+
+export function normalizeEvent(event) {
+  return (event.touches && event.touches[0]) || event;
+}

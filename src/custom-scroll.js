@@ -1,7 +1,8 @@
 import {
   once,
   addStylesToHead as _addStylesToHead,
-  getScrollBarSize as _getScrollBarSize
+  getScrollBarSize as _getScrollBarSize,
+  normalizeEvent
 } from './utils.js';
 
 const addStylesToHead = once(_addStylesToHead);
@@ -76,7 +77,11 @@ export default class CustomScroll {
     self._refs.content.addEventListener('scroll', this.onContentScroll);
     self._refs.dragV.addEventListener('mousedown', this.onStartV);
     self._refs.dragH.addEventListener('mousedown', this.onStartH);
+    self._refs.dragV.addEventListener('touchstart', this.onStartV);
+    self._refs.dragH.addEventListener('touchstart', this.onStartH);
     document.addEventListener('mouseleave', this.onEnd);
+    document.addEventListener('touchend', this.onEnd);
+    document.addEventListener('touchcancel', this.onEnd);
     self.update();
 
     if (self._options.afterInit) {
@@ -120,32 +125,42 @@ export default class CustomScroll {
 
   onStartV(event) {
     this._state.dragMode = 'v';
-    this._state.startV = event.clientY;
+    this._state.startV = normalizeEvent(event).clientY;
     document.addEventListener('mousemove', this.onPointerMove);
     document.addEventListener('mouseup', this.onEnd);
+    document.addEventListener('touchmove', this.onPointerMove);
+    document.addEventListener('touchend', this.onEnd);
+    document.addEventListener('touchcancel', this.onEnd);
     event.preventDefault();
   }
 
   onStartH(event) {
     this._state.dragMode = 'h';
-    this._state.startH = event.clientX;
+    this._state.startH = normalizeEvent(event).clientX;
     document.addEventListener('mousemove', this.onPointerMove);
     document.addEventListener('mouseup', this.onEnd);
+    document.addEventListener('touchmove', this.onPointerMove);
+    document.addEventListener('touchend', this.onEnd);
+    document.addEventListener('touchcancel', this.onEnd);
     event.preventDefault();
   }
 
-  onEnd() {
+  onEnd(event) {
     document.removeEventListener('mousemove', this.onPointerMove);
     document.removeEventListener('mouseup', this.onEnd);
+    document.removeEventListener('touchmove', this.onPointerMove);
+    document.removeEventListener('touchend', this.onEnd);
+    document.removeEventListener('touchcancel', this.onEnd);
     this._state.dragMode = null;
   }
 
   onPointerMove(event) {
+    const norm_event = normalizeEvent(event);
     const { vCoef, hCoef, dragMode } = this._state;
     const { content } = this._refs;
 
-    const v = event.deltaY && event.deltaY * event.deltaFactor || event.clientY;
-    const h = event.deltaX && event.deltaX * event.deltaFactor || event.clientX;
+    const v = norm_event.deltaY && norm_event.deltaY * norm_event.deltaFactor || norm_event.clientY;
+    const h = norm_event.deltaX && norm_event.deltaX * norm_event.deltaFactor || norm_event.clientX;
     const diffV = v - this._state.startV;
     const diffH = h - this._state.startH;
 
