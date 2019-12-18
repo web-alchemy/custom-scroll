@@ -30,13 +30,12 @@
     "build": "npm run build:js && npm run build:css",
     "build:js": "rollup -c",
     "build:css": "node build-css.js",
-    "example": "browser-sync start --server --index 'example/index.html' --serveStatic 'dist' --files 'dist'"
+    "example": "npx browser-sync start --server --index 'example/index.html' --serveStatic 'dist' --files 'dist'"
   },
   "devDependencies": {
     "@babel/core": "^7.4.5",
     "@babel/preset-env": "^7.4.5",
     "autoprefixer": "^9.6.0",
-    "browser-sync": "^2.26.7",
     "change-case": "^3.1.0",
     "lodash": "^4.17.15",
     "np": "^5.0.3",
