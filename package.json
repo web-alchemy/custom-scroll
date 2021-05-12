@@ -39,7 +39,7 @@
     "change-case": "^3.1.0",
     "lodash": "^4.17.15",
     "np": "^5.2.1",
-    "postcss": "^7.0.25",
+    "postcss": "^8.2.10",
     "postcss-csso": "^3.0.0",
     "rimraf": "^2.7.1",
     "rollup": "^1.27.13",
